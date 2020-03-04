@@ -1,11 +1,10 @@
-<!--
+
 <!DOCTYPE html>
 <html>
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  -->
   <title>Portfolio</title>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -14,7 +13,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
     integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
     crossorigin="anonymous"></script>
-    <!--
+
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
@@ -24,61 +23,9 @@
   <link href="navbar-fixed-top.css" rel="stylesheet">
   <link href="sticky-footer.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="/style.css">
-  -->
 
 
 
-  <center><canvas id="myCanvas" style="border:1px solid black;"></canvas></center>
-  <button type="button" id="clearButton">Clear</button>
-  <script>
-  var canvas = document.querySelector("canvas");
-  var ctx = canvas.getContext("2d");
-  var userMouseIsDown = false;
-  var prev = undefined;
-  var curr = undefined;
-  
-  canvas.onmousedown = function(e){
-      userMouseIsDown = true;
-  }
-  canvas.onmouseup = function(e){
-      userMouseIsDown = false;
-  }
-  canvas.onmousemove = function(e){
-      if(userMouseIsDown){
-          var rect = this.getBoundingClientRect(),
-              x = e.clientX - rect.left,
-              y = e.clientY - rect.top;
-          
-          prev = curr;
-          curr = {x: x, y: y};
-  
-          if(prev && curr){
-              ctx.beginPath();
-              ctx.moveTo(prev.x, prev.y);
-              ctx.lineTo(curr.x, curr.y);
-              ctx.closePath();
-              ctx.stroke();
-          }
-      }
-      else{
-          prev = undefined;
-          curr = undefined;
-      }
-  }
-
-  document.getElementById("clearButton").addEventListener("click", function(){
-  var width = $("#myCanvas").width();
-  var height= $("#myCanvas").height();
-  ctx.clearRect(0, 0, width, height);
-});
-
-  </script>
-
-
-
-
-
-<!-- 
 
 </head>
 
@@ -142,7 +89,57 @@
   
           <div class="jumbotron jumbotron-fluid">
             <div class="container">
+              <center>
+              <div style="border:1px solid black;display: inline-block">
+                <canvas id="myCanvas" style="display: block"></canvas>
+              </div>
+              </center>
+              <button type="button" id="clearButton">Clear</button>
+              <script>
+              var canvas = document.querySelector("canvas");
+              var ctx = canvas.getContext("2d");
+              var userMouseIsDown = false;
+              var prev = undefined;
+              var curr = undefined;
               
+              canvas.onmousedown = function(e){
+                  userMouseIsDown = true;
+              }
+              canvas.onmouseup = function(e){
+                  userMouseIsDown = false;
+              }
+              canvas.onmousemove = function(e){
+                  if(userMouseIsDown){
+                      var rect = this.getBoundingClientRect(),
+                          x = e.clientX - rect.left,
+                          y = e.clientY - rect.top;
+                      
+                      prev = curr;
+                      curr = {x: x, y: y};
+              
+                      if(prev && curr){
+                          ctx.beginPath();
+                          ctx.moveTo(prev.x, prev.y);
+                          ctx.lineTo(curr.x, curr.y);
+                          ctx.closePath();
+                          ctx.stroke();
+                      }
+                  }
+                  else{
+                      prev = undefined;
+                      curr = undefined;
+                  }
+              }
+            
+              document.getElementById("clearButton").addEventListener("click", function(){
+              var width = $("#myCanvas").width();
+              var height= $("#myCanvas").height();
+              ctx.clearRect(0, 0, width, height);
+            });
+            
+              </script>
+            
+            
             </div>
           </div>
   
